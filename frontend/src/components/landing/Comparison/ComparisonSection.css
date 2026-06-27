@@ -1,0 +1,135 @@
+.comparison-section {
+  position: relative;
+  width: 100%;
+}
+
+.comparison-card-wrap {
+  position: relative;
+}
+
+.comparison-dial-row {
+  position: relative;
+  height: clamp(100px, 14vw, 130px);
+  margin-bottom: -56px;
+}
+
+.comparison-dial-slot {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+}
+
+.comparison-card {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  min-height: clamp(300px, 42vw, 380px);
+  padding: clamp(4.5rem, 8vw, 5.5rem) clamp(1.75rem, 4vw, 3.5rem) clamp(2rem, 4vw, 2.75rem);
+  will-change: background-color, box-shadow;
+  transform: translateZ(0);
+}
+
+.comparison-card__inner {
+  min-height: clamp(200px, 28vw, 260px);
+}
+
+.comparison-dial {
+  position: relative;
+  width: clamp(100px, 14vw, 140px);
+  height: clamp(118px, 16.5vw, 165px);
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.comparison-dial__glow {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.55) 0%, rgba(34, 197, 94, 0.15) 40%, transparent 70%);
+  filter: blur(24px);
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.comparison-dial__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+.comparison-stat-card {
+  will-change: transform, opacity, filter;
+  transform: translateZ(0);
+}
+
+.comparison-stat-card--before {
+  border-radius: 16px;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.comparison-stat-card--after {
+  border-radius: 16px;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.comparison-bullet {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.comparison-heading-layer {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.comparison-tab {
+  will-change: opacity;
+  transition: font-weight 0.15s linear;
+}
+
+.comparison-tab__underline {
+  height: 2px;
+  border-radius: 999px;
+  margin-top: 4px;
+  will-change: transform, opacity;
+  transform-origin: center;
+}
+
+.comparison-tab--before {
+  position: absolute;
+  left: clamp(1rem, 4vw, 2.5rem);
+  bottom: 0.75rem;
+}
+
+.comparison-tab--after {
+  position: absolute;
+  right: clamp(1rem, 4vw, 2.5rem);
+  bottom: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comparison-card,
+  .comparison-dial,
+  .comparison-stat-card,
+  .comparison-bullet,
+  .comparison-heading-layer {
+    will-change: auto;
+  }
+}
+
+@media (max-width: 1023px) {
+  .comparison-dial-row {
+    margin-bottom: -48px;
+  }
+
+  .comparison-card {
+    min-height: auto;
+    padding-top: 4.5rem;
+  }
+}

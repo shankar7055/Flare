@@ -1,0 +1,97 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                  Int               @id @default(autoincrement())
+  email               String            @unique
+  hashedPassword      String
+  name                String
+  timezone            String            @default("UTC")
+  preferredChannel    String            @default("email") // email, sms, push
+  workingHoursStart   String?           // format "HH:MM", e.g. "09:00"
+  workingHoursEnd     String?           // format "HH:MM", e.g. "17:00"
+  googleOauthToken    String?           // JSON object for OAuth details
+  createdAt           DateTime          @default(now())
+
+  tasks               Task[]
+  notifications       NotificationLog[]
+  agentRuns           AgentRun[]
+}
+
+model Task {
+  id                  Int               @id @default(autoincrement())
+  userId              Int
+  title               String
+  description         String?
+  deadline            DateTime
+  estimatedMinutes    Int               @default(60)
+  priority            String            @default("medium") // low, medium, high, critical
+  status              String            @default("pending") // pending, in_progress, completed, overdue
+  parentTaskId        Int?
+  createdAt           DateTime          @default(now())
+  startedAt           DateTime?
+  completedAt         DateTime?
+  isRecurring         Boolean           @default(false)
+  recurrenceRule      String?           // "daily" | "weekdays" | "weekly"
+  streakCount         Int               @default(0)
+  lastCompletedDate   DateTime?
+
+  user                User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parentTask          Task?             @relation("Subtasks", fields: [parentTaskId], references: [id], onDelete: Cascade)
+  subtasks            Task[]            @relation("Subtasks")
+  scheduleSlots       ScheduleSlot[]
+  notifications       NotificationLog[]
+  rescuePlans         RescuePlan[]
+}
+
+model ScheduleSlot {
+  id                  Int               @id @default(autoincrement())
+  taskId              Int
+  startTime           DateTime
+  endTime             DateTime
+  source              String            @default("user") // agent, user
+  calendarEventId     String?
+
+  task                Task              @relation(fields: [taskId], references: [id], onDelete: Cascade)
+}
+
+model NotificationLog {
+  id                  Int               @id @default(autoincrement())
+  taskId              Int
+  userId              Int
+  sentAt              DateTime          @default(now())
+  channel             String            // email, sms, push
+  urgency             String            // low, medium, high, critical
+  message             String
+  userResponse        String?           // acknowledged, ignored, completed_after
+
+  task                Task              @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user                User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AgentRun {
+  id                  Int               @id @default(autoincrement())
+  userId              Int
+  triggerType         String            // periodic_sweep, deadline_proximity, new_task, calendar_change, rescue_mode, manual
+  reasoningTrace      String            // JSON sequence of conversation turns
+  actionsTaken        String            // JSON sequence of actions
+  createdAt           DateTime          @default(now())
+
+  user                User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model RescuePlan {
+  id                  Int               @id @default(autoincrement())
+  taskId              Int
+  generatedAt         DateTime          @default(now())
+  steps               String            // JSON array of rescue steps [{start_time, action, duration_minutes}]
+  notified            Boolean           @default(false)
+
+  task                Task              @relation(fields: [taskId], references: [id], onDelete: Cascade)
+}

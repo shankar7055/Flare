@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&display=swap');
+
+.neo-brutalist-cards-section__heading {
+  font-family: "Bitcount Single", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+
+@keyframes line-flow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes line-flow-vertical {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-line-flow {
+  animation: line-flow 2s ease-in-out infinite;
+}
+
+.animate-line-flow-vertical {
+  animation: line-flow-vertical 2s ease-in-out infinite;
+}

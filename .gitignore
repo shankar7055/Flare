@@ -1,0 +1,29 @@
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+
+# Local env files
+.env
+.env*.local
+
+# SQLite Database files
+*.db
+*.db-journal
+*.sqlite
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sw?

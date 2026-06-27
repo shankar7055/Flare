@@ -1,0 +1,38 @@
+:root {
+  --bg-base: #0b0f17;
+  --bg-surface: #11161f;
+  --bg-surface-raised: #161d29;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.14);
+
+  --text-primary: #eef1f6;
+  --text-secondary: #8c94a3;
+  --text-tertiary: #5c6373;
+
+  --teal-400: #3fd8a8;
+  --teal-600: #1d9e75;
+  --teal-bg: rgba(63, 216, 168, 0.1);
+
+  --amber-400: #f0a83a;
+  --amber-600: #ba7517;
+  --amber-bg: rgba(240, 168, 58, 0.1);
+
+  --coral-400: #e8694a;
+  --coral-600: #a32d2d;
+  --coral-bg: rgba(232, 105, 74, 0.12);
+
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  font-family: -apple-system, "Inter", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+}
