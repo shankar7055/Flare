@@ -8,8 +8,8 @@ export const Login: React.FC = () => {
   const { login } = useAuth();
   const [isSignup, setIsSignup] = useState(false);
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('demo@lifesaver.ai');
-  const [password, setPassword] = useState('Password123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -249,13 +249,9 @@ export const Login: React.FC = () => {
               onClick={() => {
                 setIsSignup(!isSignup);
                 setError(null);
-                if (isSignup) {
-                  setEmail('demo@lifesaver.ai');
-                  setPassword('Password123');
-                } else {
-                  setEmail('');
-                  setPassword('');
-                }
+                setEmail('');
+                setPassword('');
+                setName('');
               }}
               className="text-xs text-[#666666] hover:text-[#202020] font-semibold transition-colors bg-transparent border-0 cursor-pointer"
             >
